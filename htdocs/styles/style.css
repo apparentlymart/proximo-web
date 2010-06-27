@@ -163,3 +163,27 @@ h2 {
     text-align: center;
 }
 
+#offline {
+    position: fixed;
+    background: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+}
+#offline div {
+    position: fixed;
+    z-index: 2000;
+    top: 50%;
+    left: 50%;
+    margin-left: -158px;
+    margin-top: -58px;
+    width: 300px;
+    height: 100px;
+    font-size: 0.9em;
+    overflow: hidden;
+    background: rgb(122,122,122) none;
+    padding: 14px;
+    border: 2px solid #ffffff;
+}
