@@ -32,7 +32,7 @@ function handlePage(targetElem, hash) {
 
     if (pathChunks[0] == "a") {
         if (pathChunks.length == 1) {
-            // TODO: Agency listing
+            return renderRootPage(targetElem);
         }
         else {
             var agencyId = pathChunks[1];
@@ -66,6 +66,26 @@ function handlePage(targetElem, hash) {
     targetElem.html("<p>Invalid fragment identifier</p>");
 
     return null;
+}
+
+function renderRootPage(targetElem) {
+    var agencyList = $("<ul class='chooselist'></ul>");
+    targetElem.append(agencyList);
+
+    getCacheData(["agencies"], function (data) {
+
+        for (var i = 0; i < data.items.length; i++) {
+            var agency = data.items[i];
+            var li = $("<li></li>");
+            var a = $("<a></a>");
+            a.text(agency.display_name);
+            a.attr("href", makeUrl(["a", agency.id]));
+            li.append(a);
+            agencyList.append(li);
+        }
+
+    });
+
 }
 
 function renderAgencyPage(targetElem, agencyId) {
