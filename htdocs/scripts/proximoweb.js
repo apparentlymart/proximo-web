@@ -77,7 +77,7 @@ function renderAgencyPage(targetElem, agencyId) {
         setTitle(data.display_name);
     });
 
-    var routeList = $("<ul></ul>");
+    var routeList = $("<ul class='chooselist'></ul>");
     targetElem.append(routeList);
     getCacheData(["agencies", agencyId, "routes"], function (data) {
         // As a special case, if there's only one route for
@@ -110,37 +110,43 @@ function renderRouteRunPage(targetElem, agencyId, routeId, runId) {
     });
 
     var runList = $("<ul id='runlist'></ul>");
+    var stopList = $("<ul id='stoplist' class='chooselist'></ul>");
     targetElem.append(runList);
+    targetElem.append(stopList);
+
     getCacheData(["agencies", agencyId, "routes", routeId, "runs"], function (data) {
         for (var i = 0; i < data.items.length; i++) {
             var run = data.items[i];
             if (! run.display_in_ui) continue;
 
+            // Default to showing the first one if one isn't explicitly selected.
+            if (! runId) runId = run.id;
+
             var li = $("<li></li>");
             var a = runId == run.id ? $("<span></span>") : $("<a></a>");
-            a.text(run.display_name);
+            a.text(run.direction_name ? run.direction_name : run.display_name);
             a.attr("href", makeUrl(["a", agencyId, "r", routeId, "r", run.id]));
             li.append(a);
             runList.append(li);
         }
+
+        if (runId) {
+            getCacheData(["agencies", agencyId, "routes", routeId, "runs", runId, "stops"], function (data) {
+                for (var i = 0; i < data.items.length; i++) {
+                    var stop = data.items[i];
+
+                    var li = $("<li></li>");
+                    var a = $("<a></a>");
+                    a.text(stop.display_name);
+                    a.attr("href", makeUrl(["a", agencyId, "r", routeId, "s", stop.id]));
+                    li.append(a);
+                    stopList.append(li);
+                }
+            });
+        }
+
     });
 
-    if (runId) {
-        var stopList = $("<ul id='stoplist'></ul>");
-        targetElem.append(stopList);
-        getCacheData(["agencies", agencyId, "routes", routeId, "runs", runId, "stops"], function (data) {
-            for (var i = 0; i < data.items.length; i++) {
-                var stop = data.items[i];
-
-                var li = $("<li></li>");
-                var a = $("<a></a>");
-                a.text(stop.display_name);
-                a.attr("href", makeUrl(["a", agencyId, "r", routeId, "s", stop.id]));
-                li.append(a);
-                stopList.append(li);
-            }
-        });
-    }
 }
 
 function renderStopPage(targetElem, agencyId, stopId) {
@@ -176,10 +182,10 @@ function renderStopPage(targetElem, agencyId, stopId) {
                         var isDeparting = prediction.is_departing;
                         var minutes = prediction.minutes;
 
-                        var routeElem = $("<div></div>");
+                        var routeElem = $("<div class='routename'></div>");
                         routeElem.text(routeId);
-                        var runElem = $("<div>&nbsp;</div>");
-                        var timeElem = $("<div></div>");
+                        var runElem = $("<div class='runname'>&nbsp;</div>");
+                        var timeElem = $("<div class='time'></div>");
                         timeElem.text(minutes != 0 ? minutes+" min" : (isDeparting ? "Departing" : "Arriving"));
 
                         // Asynchronously fill in the route and run names.
@@ -318,7 +324,7 @@ function internalRedirect(pathChunks) {
 
 $(document).ready(function() {
     handlePage($("#main"), window.location.hash);
-    $(window).bind("hashchange", function () { handlePage($("#main"), window.location.hash); });
+    $(window).bind("hashchange", function () { scroll(0,0); handlePage($("#main"), window.location.hash); });
     $(window).bind("online", function () { handlePage($("#main"), window.location.hash); });
     $(window).bind("offline", function () { handlePage($("#main"), window.location.hash); });
     $("#throbber").css("display", "none");

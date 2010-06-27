@@ -1,2 +1,165 @@
 
+body {
+    background: #000000 none;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", "Helvetica", sans-serif;
+}
+
+h1 {
+    background: #7f7f7f;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0;
+    padding: 4px 8px;
+    font-size: 1em;
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(148,148,148) 70%,
+        rgb(122,122,122) 40%
+    );
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.7, rgb(148,148,148)),
+        color-stop(0.4, rgb(122,122,122))
+    );
+    text-shadow: #000000 0 0 4px;
+}
+
+#throbber {
+    text-indent: -5000px;
+    overflow: hidden;
+    width: 16px;
+    height: 16px;
+    background: url(../images/throbber.gif);
+    position: absolute;
+    top: 6px;
+    right: 8px;
+}
+
+h2 {
+    background: rgb(148,148,148) none;
+    margin: 0;
+    padding: 8px;
+    padding-top: 12px;
+    font-size: 1.3em;
+    font-weight: bold;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(1, rgb(92,92,92)),
+        color-stop(0.91, rgb(178,178,178))
+    );
+    text-shadow: #000000 0 0 6px;
+}
+
+.chooselist, .chooselist li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.chooselist li {
+    border-bottom: 1px solid #222222;
+}
+.chooselist li a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 12px 8px;
+}
+
+.routerun #runlist, .routerun #runlist li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.routerun #runlist {
+    padding: 8px;
+    border-bottom: 1px solid #222222;
+    text-align: center;
+}
+.routerun #runlist li {
+    display: inline;
+}
+.routerun #runlist li a, .routerun #runlist li span {
+    display: inline-block;
+    padding: 8px;
+    color: #000000;
+    text-decoration: none;
+    border: 1px outset rgb(186,186,186);
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.17, rgb(186,186,186)),
+        color-stop(0.66, rgb(230,230,230))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(186,186,186) 17%,
+        rgb(230,230,230) 66%
+    );
+}
+.routerun #runlist li {
+    border-radius: 5px;
+}
+.routerun #runlist li span {
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(1.0, rgb(186,186,186)),
+        color-stop(0.83, rgb(230,230,230))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(186,186,186) 100%,
+        rgb(230,230,230) 83%
+    );
+    border: 1px inset rgb(186,186,186);
+}
+
+#bottommatter {
+    font-size: 0.75em;
+    text-align: center;
+}
+#bottommatter a {
+    color: orange;
+    text-decoration: none;
+}
+
+#predictionslist, #predictionslist li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#predictionslist li {
+    padding: 8px;
+    border-bottom: 1px solid #222222;
+}
+#predictionslist .routename {
+    float: left;
+    font-weight: bold;
+}
+#predictionslist .time {
+    text-align: right;
+}
+#predictionslist .runname {
+    clear: left;
+    font-size: 0.9em;
+    color: #aaaaaa;
+}
+#predictionslist .bad {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+#lastupdate {
+    text-align: center;
+}
 
