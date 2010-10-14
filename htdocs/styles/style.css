@@ -163,7 +163,7 @@ h2 {
     text-align: center;
 }
 
-#offline {
+#offline, #broken {
     position: fixed;
     background: black;
     top: 0;
@@ -172,7 +172,7 @@ h2 {
     bottom: 0;
     background: rgba(0, 0, 0, 0.8);
 }
-#offline div {
+#offline div, #broken div {
     position: fixed;
     z-index: 2000;
     top: 50%;

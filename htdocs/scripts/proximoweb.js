@@ -27,6 +27,7 @@ function handlePage(targetElem, hash) {
     setTitle("");
     targetElem.html("");
     $("#offline").css("display", "none");
+    $("#broken").css("display", "none");
 
     var pathChunks = path.split("/");
 
@@ -283,8 +284,6 @@ function getCacheData(pathChunks, callback) {
             getData(pathChunks, realCallback);
         }
         else {
-            // FIXME: Implement some kind of full-page error when we reach this state,
-            // letting the user know that he must come online to read this page.
             $("#offline").css("display", "");
         }
     }
@@ -318,6 +317,12 @@ function getData(pathChunks, callback) {
     }
     else {
         var realCallback = function (data) {
+
+            if (! data) {
+                $("#broken").css("display", "");
+                return;
+            }
+
             if (callbacks[url]) {
                 var myCallbacks = callbacks[url];
                 for (var i = 0; i < myCallbacks.length; i++) {
